@@ -229,13 +229,13 @@ Hello ASG
 
 ### Webアクセス（ALB経由）
 
-![web](images/web.jpg)
+![web](images/alb-access.jpg)
 
 ---
 
 ### VPC
 
-![vpc](images/vpc.jpg)
+![vpc](images/vpc-overview.jpg)
 
 ---
 
