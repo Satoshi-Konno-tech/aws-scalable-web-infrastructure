@@ -306,11 +306,11 @@ EC2インスタンスが複数AZに分散して登録され、
 
 EC2内部でCPU負荷を発生させて検証を実施
 
+```
 yes > /dev/null &
-
 yes > /dev/null &
-
 yes > /dev/null &
+```
 
 ---
 
@@ -371,6 +371,7 @@ Target Trackingポリシーにより、
 
 Target Groupからもインスタンスが削除され、
 負荷分散対象が減少していることを確認
+
 ---
 
 ### 検証結果
