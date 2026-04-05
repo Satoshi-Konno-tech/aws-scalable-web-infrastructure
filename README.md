@@ -1,5 +1,11 @@
 # Scalable Web Architecture on AWS (ALB + Auto Scaling)
 
+## アーキテクチャ図
+
+![architecture](images/architecture.jpg)
+
+---
+
 ## 概要
 
 AWS上にWebサーバー環境を構築し、Application Load Balancer (ALB) を利用してEC2インスタンスへトラフィックをルーティングする構成を作成しました。
@@ -10,11 +16,7 @@ AWS上にWebサーバー環境を構築し、Application Load Balancer (ALB) を
 
 ---
 
-## アーキテクチャ図
 
-![architecture](images/architecture.jpg)
-
----
 
 ## 使用サービス
 
