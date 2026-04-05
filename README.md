@@ -304,6 +304,9 @@ CPU低下 → スケールイン（3→2）
 
 ![route-table-association](images/route-table-association.jpg)
 
+Public Subnetに対してInternet Gatewayへのルートを設定し、
+インターネットへのアウトバウンド通信を可能にしています。
+
 ---
 
 ### Application Load Balancer
