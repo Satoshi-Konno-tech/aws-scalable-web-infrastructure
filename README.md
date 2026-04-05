@@ -4,6 +4,8 @@
 
 ![architecture](images/architecture.jpg)
 
+ALBを公開入口とし、EC2はPrivateに配置したAuto Scaling構成
+
 ---
 
 ## 概要
