@@ -309,6 +309,24 @@ Public Subnetに対してInternet Gatewayへのルートを設定し、
 
 ---
 
+### Security Group（ALB）
+
+![sg-alb](images/sg-alb.jpg)
+
+---
+
+### Security Group（EC2）
+
+![sg-ec2](images/sg-ec2.jpg)
+
+ALBはインターネットからのHTTP通信（80番ポート）を受け付け、
+EC2はALBのSecurity Groupからの通信のみを許可しています。
+
+これにより、EC2への直接アクセスを防ぎ、
+ALB経由のみの通信経路を実現しています。
+
+---
+
 ### Application Load Balancer
 
 ![alb](images/alb.jpg)
