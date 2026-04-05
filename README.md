@@ -223,60 +223,8 @@ http://alb-web-1862903583.ap-northeast-1.elb.amazonaws.com
 Hello ASG
 ---
 
-## Auto Scaling 検証
-
-負荷に応じたスケーリング動作を確認しました。
-
----
-
-### スケールアウト
-
-EC2内部でCPU負荷を発生
-
-yes > /dev/null &  
-yes > /dev/null &  
-yes > /dev/null &  
-
----
-
-### 結果
-
-CPUUtilizationの上昇に伴い、  
-インスタンス数が 2台 → 3台 に増加
-
-- Auto Scaling Groupによりインスタンスが自動起動
-- Target Groupに登録されHealthyになることを確認
-
----
-
-### スケールイン
-
-CPU負荷停止
-
-pkill yes
-
----
-
-### 結果
-
-CPUUtilizationの低下に伴い、  
-インスタンス数が 3台 → 2台 に減少
-
-- インスタンスが自動削除
-- Target Groupから除外されることを確認
-
----
-
-### 検証結果
-
-CPU上昇 → スケールアウト（2→3）  
-CPU低下 → スケールイン（3→2）
-
-負荷に応じてインスタンス数が自動調整されることを確認しました。
-
----
-
 ## スクリーンショット
+以下に、各構成および検証結果のスクリーンショットを示します。
 
 ### Webアクセス（ALB経由）
 
@@ -350,6 +298,16 @@ EC2インスタンスが複数AZに分散して登録され、
 ## Auto Scaling 検証
 
 負荷に応じたスケーリング動作を確認しました。
+
+---
+
+### 負荷発生方法
+
+EC2内部でCPU負荷を発生させて検証を実施
+
+yes > /dev/null &
+yes > /dev/null &
+yes > /dev/null &
 
 ---
 
