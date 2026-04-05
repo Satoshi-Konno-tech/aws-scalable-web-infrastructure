@@ -313,7 +313,6 @@ Public Subnetに対してInternet Gatewayへのルートを設定し、
 
 ![sg-alb](images/sg-alb.jpg)
 
----
 
 ### Security Group（EC2）
 
@@ -330,6 +329,12 @@ ALB経由のみの通信経路を実現しています。
 ### Application Load Balancer
 
 ![alb](images/alb.jpg)
+
+ALBはInternet-facingとして構成し、
+複数AZにまたがるサブネットに配置しています。
+
+外部からのHTTPリクエストを受け取り、
+Target Groupを通じてEC2へルーティングしています。
 
 ---
 
