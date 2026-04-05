@@ -300,6 +300,10 @@ CPU低下 → スケールイン（3→2）
 
 ![route-table](images/route-table.jpg)
 
+### Route Table Association
+
+![route-table-association](images/route-table-association.jpg)
+
 ---
 
 ### Application Load Balancer
