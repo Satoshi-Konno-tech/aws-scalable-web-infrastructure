@@ -80,6 +80,11 @@ EC2インスタンスにはパブリックIPを付与していません。
 ↓  
 Internet Gateway  
 
+Public Subnetに対しては、0.0.0.0/0 をInternet Gatewayへルーティングし、
+インターネット接続を可能としています。
+
+Private Subnetには直接インターネットへのルートは設定していません。
+
 ---
 
 ## EC2 Web Server
@@ -102,6 +107,9 @@ Internet Gateway
 ### テストページ
 
 Hello ASG
+
+シンプルなWebコンテンツを配置し、ALB経由での疎通確認および
+Auto Scalingによるインスタンス増減時の動作確認を行っています。
 
 ---
 
@@ -184,7 +192,7 @@ CloudWatchのCPUUtilizationをトリガーとして、
 ### EC2 Security Group
 
 - SSH 22  
-  Source: 自身のIPのみ（Bastion経由で接続）
+  Source: BastionサーバのSecurity Group
 
 - HTTP 80  
   Source: ALB Security Group
@@ -379,9 +387,14 @@ Target Groupからもインスタンスが削除され、
 - CPU上昇 → スケールアウト（2 → 3）
 - CPU低下 → スケールイン（3 → 2）
 
-本検証では、CPU使用率をトリガーとしたAuto Scalingの挙動を、
-CloudWatch・EC2・Target Groupの各観点から確認し、
-スケーリングの一連の動作を実証しました。
+本検証では、CPU使用率をトリガーとしたAuto Scalingの挙動について、
+CloudWatchメトリクスの変化、Auto Scaling Groupのインスタンス増減、
+およびTarget Groupへのインスタンス登録・削除の各観点から確認を行いました。
+
+特に、スケールアウト時には新規インスタンスが自動的に起動し、
+Target Groupへ登録後、ヘルスチェック通過を経てトラフィックが分散されること、
+またスケールイン時には対象インスタンスが安全に切り離されることを確認し、
+一連のスケーリング動作が正常に機能することを実証しました。
 
 ---
 
