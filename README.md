@@ -60,6 +60,9 @@ CIDR
 - ALB配置
 - Bastionサーバ配置
 
+Public SubnetはALB用として使用し、  
+EC2インスタンスにはパブリックIPを付与していません。
+
 ---
 
 ### Private Subnet
