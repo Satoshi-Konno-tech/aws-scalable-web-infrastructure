@@ -10,17 +10,9 @@ AWS上にWebサーバー環境を構築し、Application Load Balancer (ALB) を
 
 ---
 
-## アーキテクチャ
+## アーキテクチャ図
 
-Internet  
-↓  
-Application Load Balancer  
-↓  
-Target Group  
-↓  
-EC2（Auto Scaling Group / Private Subnet）  
-↑  
-Bastion（SSH接続）
+![architecture](images/architecture.jpg)
 
 ---
 
