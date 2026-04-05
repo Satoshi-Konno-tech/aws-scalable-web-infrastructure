@@ -221,6 +221,7 @@ http://alb-web-1862903583.ap-northeast-1.elb.amazonaws.com
 ### 表示
 
 Hello ASG
+
 ---
 
 ## スクリーンショット
@@ -306,7 +307,9 @@ EC2インスタンスが複数AZに分散して登録され、
 EC2内部でCPU負荷を発生させて検証を実施
 
 yes > /dev/null &
+
 yes > /dev/null &
+
 yes > /dev/null &
 
 ---
