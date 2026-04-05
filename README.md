@@ -342,21 +342,84 @@ Target Groupを通じてEC2へルーティングしています。
 
 ![targetgroup](images/targetgroup.jpg)
 
+EC2インスタンスが複数AZに分散して登録され、
+ヘルスチェックにより正常性が担保されていることを確認
+
 ---
 
-### Auto Scaling（スケールアウト）
+## Auto Scaling 検証
 
-※CPU上昇に伴いインスタンスが増加したことを確認
+負荷に応じたスケーリング動作を確認しました。
+
+---
+
+### CPU使用率（トリガー）
+
+![cpu](images/cpu.jpg)
+
+EC2内部でCPU負荷を発生させ、CPUUtilizationの上昇を確認
+
+---
+
+### スケールアウト
 
 ![scale-out](images/scale-out.jpg)
 
+CPU使用率の上昇により、Auto Scaling Groupが動作し  
+インスタンス数が **2台 → 3台** に増加したことを確認
+
 ---
 
-### Auto Scaling（スケールイン）
+### Auto Scaling イベント（スケールアウト）
 
-※CPU低下に伴いインスタンスが減少したことを確認
+![asg-event-scaleout](images/asg-event-scaleout.jpg)
+
+CloudWatchアラーム（Target Trackingポリシー）により  
+インスタンスが自動起動されたログを確認
+
+---
+
+### CPU使用率（低下）
+
+![cpu-low](images/cpu-low.jpg)
+
+CPU負荷の低下を確認
+
+---
+
+### Auto Scaling イベント（スケールイン）
+
+![asg-event-scalein](images/asg-event-scalein.jpg)
+
+Target Trackingポリシーにより、
+インスタンスが自動削除（3台 → 2台）されたことを確認
+
+---
+
+### スケールイン
 
 ![scale-in](images/scale-in.jpg)
+
+インスタンス数が3台から2台へ減少したことを確認
+
+---
+
+### Target Group 反映
+
+![targetgroup-scalein](images/targetgroup-scalein.jpg)
+
+Target Groupからもインスタンスが削除され、
+負荷分散対象が減少していることを確認
+---
+
+### 検証結果
+
+- CPU上昇 → スケールアウト（2 → 3）
+- CPU低下 → スケールイン（3 → 2）
+
+本検証では、CPU使用率をトリガーとしたAuto Scalingの挙動を、
+CloudWatch・EC2・Target Groupの各観点から確認し、
+スケーリングの一連の動作を実証しました。
 
 ---
 
