@@ -1,15 +1,14 @@
 # Scalable Web Architecture on AWS (ALB + Auto Scaling)
 
+
 ## 概要
 
 AWS上にWebサーバー環境を構築し、Application Load BalancerとAuto Scaling Groupを用いて、  
 可用性とスケーラビリティを確保した構成を検証しました。
 
-セキュリティ設計として、EC2インスタンスはPrivate Subnetに配置し、  
-Security GroupによりHTTP通信はALB経由のみ許可することで、外部からの直接アクセスを制御しています。
+EC2はPrivate Subnetに配置し、外部公開はALB経由のみに制限しています。
 
-また、CloudWatchメトリクス（CPUUtilization）をトリガーとして、  
-負荷に応じてインスタンス数が自動的に増減する仕組みを検証しました。
+また、CPU負荷を発生させることで、Auto Scalingによるスケールアウト動作を確認しました。
 
 ---
 
@@ -48,6 +47,20 @@ ALBを公開入口とし、EC2はPrivate Subnetに配置したAuto Scaling構成
 - Auto Scaling Group
 - Launch Template
 - Amazon CloudWatch
+
+---
+
+## 検証内容
+
+EC2に対してCPU負荷を発生させることで、Auto Scalingの動作を検証しました。
+
+- 手法  
+  → yesコマンドを用いてCPU負荷を発生させる
+
+- 確認内容  
+  → CloudWatchのCPUUtilizationが上昇  
+  → Auto Scaling Groupによりインスタンス数が増加（2台→3台）  
+  → 新規インスタンスがTarget Groupに登録されることを確認
 
 ---
 
@@ -192,18 +205,6 @@ CloudWatchのCPUUtilizationをトリガーとして、
 
 負荷に応じてインスタンス数を自動調整することで、  
 可用性の向上とコスト最適化を両立するため
-
----
-
-## 設計意図
-
-本構成では、以下の点を重視して設計を行いました。
-
-- EC2をPrivateサブネットに配置し、外部公開をALBのみに限定することでセキュリティを確保
-- ALBをPublicサブネットに配置し、インターネットからのトラフィックを集約
-- 複数AZにリソースを分散し、単一障害点を排除
-- Auto Scaling Groupにより負荷に応じたスケーリングを実現し、可用性とコスト最適化を両立
-- Bastionサーバを経由したSSH接続により、安全な運用アクセスを確保
 
 ---
 
