@@ -1,24 +1,38 @@
 # Scalable Web Architecture on AWS (ALB + Auto Scaling)
 
+## 概要
+
+AWS上にWebサーバー環境を構築し、Application Load BalancerとAuto Scaling Groupを用いて、  
+可用性とスケーラビリティを確保した構成を検証しました。
+
+セキュリティ設計として、EC2インスタンスはPrivate Subnetに配置し、  
+Security GroupによりHTTP通信はALB経由のみ許可することで、外部からの直接アクセスを制御しています。
+
+また、CloudWatchメトリクス（CPUUtilization）をトリガーとして、  
+負荷に応じてインスタンス数が自動的に増減する仕組みを検証しました。
+
+---
+
 ## アーキテクチャ図
 
 ![architecture](images/architecture.jpg)
 
-ALBを公開入口とし、EC2はPrivateに配置したAuto Scaling構成
+ALBを公開入口とし、EC2はPrivate Subnetに配置したAuto Scaling構成
 
 ---
 
-## 概要
+## 設計意図
 
-AWS上にWebサーバー環境を構築し、Application Load Balancer (ALB) を利用してEC2インスタンスへトラフィックをルーティングする構成を作成しました。
+- EC2をPrivate Subnetに配置  
+  → 外部から直接アクセスできないようにし、セキュリティを確保
 
-セキュリティ設計として、EC2インスタンスにはパブリックIPを付与せず、Security GroupによりHTTP通信はALB経由のみ許可することで、外部からの直接アクセスを制御しています。
+- ALBをPublic Subnetに配置  
+  → インターネットからの入口を一元化し、トラフィックを制御
 
-また、本構成ではAuto Scaling Group（ASG）を導入し、CloudWatchメトリクス（CPUUtilization）をトリガーとして、負荷に応じてインスタンス数が自動的に増減する仕組みを検証しました。
+- Auto Scaling Groupを採用  
+  → 負荷に応じてインスタンス数を自動調整し、可用性とコスト最適化を両立
 
 ---
-
-
 
 ## 使用サービス
 
