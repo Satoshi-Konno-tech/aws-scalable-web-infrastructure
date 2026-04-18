@@ -26,20 +26,20 @@ ALBを公開入口とし、EC2はPrivate Subnetに配置したAuto Scaling構成
 
 ---
 
-## 使用サービス
-
-- Amazon VPC
-- Subnet
-- Internet Gateway
-- Route Table
-- Security Group
-- Amazon EC2
-- Apache HTTP Server
+## ■ 構成
+- VPC / Subnet / Route Table / IGW
 - Application Load Balancer
-- Target Group
+- EC2（Private Subnet）
 - Auto Scaling Group
-- Launch Template
-- Amazon CloudWatch
+- Security Group
+
+---
+
+## ■ 設計意図
+- EC2をPrivate Subnetに配置し、直接アクセスを遮断
+- ALBを入口とすることで外部公開範囲を制御
+- マルチAZ構成により可用性を確保
+- Auto Scalingにより負荷に応じたスケーリングを実現
 
 ---
 
