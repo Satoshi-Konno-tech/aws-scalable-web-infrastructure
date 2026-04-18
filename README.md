@@ -1,14 +1,7 @@
-# Scalable Web Architecture on AWS (ALB + Auto Scaling)
+# Scalable Web Architecture on AWS
 
-
-## 概要
-
-AWS上にWebサーバー環境を構築し、Application Load BalancerとAuto Scaling Groupを用いて、  
-可用性とスケーラビリティを確保した構成を検証しました。
-
-EC2はPrivate Subnetに配置し、外部公開はALB経由のみに制限しています。
-
-また、CPU負荷を発生させることで、Auto Scalingによるスケールアウト動作を確認しました。
+## ■ 概要
+AWS上にて、可用性とセキュリティを考慮したWebアーキテクチャを設計・構築しました。
 
 ---
 
