@@ -13,19 +13,6 @@ ALBを公開入口とし、EC2はPrivate Subnetに配置したAuto Scaling構成
 
 ---
 
-## 設計意図
-
-- EC2をPrivate Subnetに配置  
-  → 外部から直接アクセスできないようにし、セキュリティを確保
-
-- ALBをPublic Subnetに配置  
-  → インターネットからの入口を一元化し、トラフィックを制御
-
-- Auto Scaling Groupを採用  
-  → 負荷に応じてインスタンス数を自動調整し、可用性とコスト最適化を両立
-
----
-
 ## ■ 構成
 - VPC / Subnet / Route Table / IGW
 - Application Load Balancer
